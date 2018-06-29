@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Div in Big Div</title>
+    <style>
+        body {
+            background-color: #fcfcfc;
+        }
+
+        .outer {
+            display: table;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+
+        .inner {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .center {
+            margin: 0 auto;
+            width: 800px;
+            height: 450px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body id="custom">
+
+    <div class="outer">
+        <div class="inner">
+            <div class="center">
+                <p>This .center div should scale to fit viewport.</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const $ = document.querySelector.bind(document);
+
+        const maxwidth = window.innerWidth;
+        const maxheight = window.innerHeight;
+        let scale = Math.min(
+            maxwidth / $('.center').offsetWidth,
+            maxheight / $('.center').offsetHeight
+        );
+        console.log(scale);
+    </script>
+</body>
+
+</html>
