@@ -38,6 +38,11 @@
 
 <body id="custom">
 
+    <a href="//github.com/Ugotsta/Div-in-big-div">
+        <img style="z-index:1; position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+            alt="Fork me on GitHub">
+    </a>
+
     <div class="outer">
         <div class="inner">
             <div class="center">
@@ -66,16 +71,17 @@
             const maxwidth = window.innerWidth;
             const maxheight = window.innerHeight;
             // scale accounts for whichever is less, width or heigth
-            let scale = Math.min(
+            const scale = Math.min(
                 maxwidth / (c.width + c.padding),
                 maxheight / (c.height + c.padding)
             );
             // setup positions for transform
-            let x = c.x - (maxwidth - c.width)/2;
-            let y = c.y - (maxheight - c.height)/2;
+            const x = c.x - (maxwidth - c.width) / 2;
+            const y = c.y - (maxheight - c.height) / 2;
             // initiate transform
-            let transform = `translateX(-${x}px) translateY(-${y}px)`;
-            transform += ` scale(${scale})`;
+            const transform = `translateX(-${x}px)
+                translateY(-${y}px)
+                scale(${scale})`;
             outer.style.transform = transform;
         }
 
