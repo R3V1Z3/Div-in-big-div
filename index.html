@@ -47,8 +47,11 @@
     </div>
 
     <script>
+        // setup shortcut to querySelector
         const $ = document.querySelector.bind(document);
+        const outer = $('.outer');
         const center = $('.center');
+        // configure object to store properties
         const c = {
             x: center.offsetLeft,
             y: center.offsetTop,
@@ -58,22 +61,25 @@
         };
         center_view();
 
+        // main centering routine
         function center_view() {
             const maxwidth = window.innerWidth;
             const maxheight = window.innerHeight;
-            const outer = $('.outer');
-            const center = $('.center');
+            // scale accounts for whichever is less, width or heigth
             let scale = Math.min(
                 maxwidth / (c.width + c.padding),
                 maxheight / (c.height + c.padding)
             );
+            // setup positions for transform
             let x = c.x - (maxwidth - c.width)/2;
             let y = c.y - (maxheight - c.height)/2;
+            // initiate transform
             let transform = `translateX(-${x}px) translateY(-${y}px)`;
-            transform += ` scale(${scale}) rotateX(3deg) perspective(500px)`;
+            transform += ` scale(${scale})`;
             outer.style.transform = transform;
         }
 
+        // re-center whenever browser is resized
         window.addEventListener('resize', e => {
             center_view();
         });
