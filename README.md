@@ -10,4 +10,4 @@ Initial outline:
 - Use flexbox or other optimized method to center .inner div.
 - GET window.width and window.height.
 - GET .inner div x and y coordinates (top, left).
-- Scale the small div to fit the viewport, using that div's margin as a sort of padding.
+- Scale .outer div so .inner div take full viewport and adjust translatex and translatey so it's always centered.

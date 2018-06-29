@@ -8,22 +8,27 @@
     <style>
         body {
             background-color: #fcfcfc;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
 
         .outer {
-            display: table;
+            background: cornflowerblue;
             position: absolute;
-            height: 100%;
-            width: 100%;
-        }
-
-        .inner {
-            display: table-cell;
-            vertical-align: middle;
+            height: 3840px;
+            width: 2160px;
+            transform-origin: center;
+            padding: 1000px;
         }
 
         .center {
-            margin: 0 auto;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
             width: 800px;
             height: 450px;
             background-color: #ddd;
@@ -40,18 +45,38 @@
             </div>
         </div>
     </div>
-    </div>
 
     <script>
         const $ = document.querySelector.bind(document);
+        const center = $('.center');
+        const c = {
+            x: center.offsetLeft,
+            y: center.offsetTop,
+            width: center.offsetWidth,
+            height: center.offsetHeight,
+            padding: 50
+        };
+        center_view();
 
-        const maxwidth = window.innerWidth;
-        const maxheight = window.innerHeight;
-        let scale = Math.min(
-            maxwidth / $('.center').offsetWidth,
-            maxheight / $('.center').offsetHeight
-        );
-        console.log(scale);
+        function center_view() {
+            const maxwidth = window.innerWidth;
+            const maxheight = window.innerHeight;
+            const outer = $('.outer');
+            const center = $('.center');
+            let scale = Math.min(
+                maxwidth / (c.width + c.padding),
+                maxheight / (c.height + c.padding)
+            );
+            let x = c.x - (maxwidth - c.width)/2;
+            let y = c.y - (maxheight - c.height)/2;
+            let transform = `translateX(-${x}px) translateY(-${y}px)`;
+            transform += ` scale(${scale}) rotateX(3deg) perspective(500px)`;
+            outer.style.transform = transform;
+        }
+
+        window.addEventListener('resize', e => {
+            center_view();
+        });
     </script>
 </body>
 
